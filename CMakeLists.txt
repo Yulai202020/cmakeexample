@@ -5,10 +5,10 @@ project(example) # set project name
 set(CMAKE_C_COMPILER musl-gcc)
 
 add_executable(${PROJECT_NAME} main.c) # make executable
-set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-static")
+target_link_options(${PROJECT_NAME} PRIVATE -static)
 
 add_library(mylib STATIC mylib.c) # make library
-target_link_libraries(${PROJECT_NAME} SHARED mylib) # link libs
+target_link_libraries(${PROJECT_NAME} PRIVATE mylib) # link libs
 
 # $ENV{PATH} get from enviremont
 # $VAR_NAME get from cache or local
@@ -47,12 +47,10 @@ target_link_libraries(${PROJECT_NAME} SHARED mylib) # link libs
 # add_library(LIB_NAME [SHARED|STATIC] HEADER_FILE SOURCE_FILE)
 # add_subdirectory(DIR) adds subs dir but in sub dir cloud be CMakeLists.txt
 
-# find_program(path_to_program program [PATHS...]) - write path to program to path_to_program
+# find_program(path_to_program program [PATHS...])
 # find_library(path_to_lib NAMES mylib [PATHS...])
-# find_file()
 # find_path(VAR_NAME file_name [PATHS...])
 # find_file(VAR_NAME file_name [PATHS...])
-
 
 # if(condition)
 # elseif(condition)
